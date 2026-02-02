@@ -1,0 +1,17 @@
+/*
+  This file is used by the Angular CLI build process.
+  See: https://github.com/angular/angular-cli/wiki/tsconfig
+*/
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/app",
+        "types": []
+    },
+    "files": [
+        "src/main.ts"
+    ],
+    "include": [
+        "src/**/*.d.ts"
+    ]
+}
