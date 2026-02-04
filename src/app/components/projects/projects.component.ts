@@ -234,10 +234,10 @@ export class ProjectsComponent {
     {
       title: 'Commercial Monitoring Dashboard',
       description: 'A comprehensive dashboard for business analytics, tracking sales performance and KPIs in real-time.',
-      image: 'assets/com.PNG',
+      image: 'assets/images/com.PNG',
       technologies: ['Angular', 'Spring Boot', 'JWT', 'Chart.js'],
       liveLink: '#',
-      githubLink: '#'
+      githubLink: 'https://github.com/breezy404/Marrakech-Horizon'
     },
     {
       title: 'Event & Ticket Reservation',
@@ -248,18 +248,18 @@ export class ProjectsComponent {
       githubLink: '#'
     },
     {
-      title: 'Travel Agency System',
+      title: 'Association Oulad lkhir',
       description: 'Management system for travel agencies to handle bookings, customers, and travel packages efficiently.',
       image: 'assets/travel.jpg',
       technologies: ['PHP', 'Laravel', 'Bootstrap', 'MySQL'],
-      githubLink: '#'
+      githubLink: 'https://github.com/breezy404/oulad-lkhir'
     },
-    {
-      title: 'Commercial Monitoring Dashboard',
-      description: 'Robust authentication service providing secure login, registration, and role-based access control.',
-      image: 'assets/auth.jpg',
-      technologies: ['Spring Security', 'JWT', 'Angular'],
-      githubLink: '#'
-    }
+    // {
+    //   title: 'Commercial Monitoring Dashboard',
+    //   description: 'Robust authentication service providing secure login, registration, and role-based access control.',
+    //   image: 'assets/auth.jpg',
+    //   technologies: ['Spring Security', 'JWT', 'Angular'],
+    //   githubLink: '#'
+    // }
   ];
 }

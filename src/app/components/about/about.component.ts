@@ -13,7 +13,7 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
        <div class="about-grid">
   <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
     <div class="image-wrapper">
-      <img src="assets/images/Wha.jpg" alt="Zakariae OUKHAMOU Profile Picture" loading="lazy" width="280" height="280">
+      <img src="assets/images/photo.jpeg" alt="Zakariae OUKHAMOU Profile Picture" loading="lazy" width="280" height="280">
     </div>
   </div>
 

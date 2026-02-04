@@ -165,22 +165,22 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
 export class SkillsComponent {
   frontendSkills = [
     { name: 'HTML5 & CSS3', level: 95 },
-    { name: 'JavaScript (ES6+)', level: 90 },
+    { name: 'JavaScript', level: 90 },
     { name: 'Angular', level: 85 },
-    { name: 'Tailwind CSS', level: 80 }
+    { name: 'NEXT.js/React.js', level: 80 }
   ];
 
   backendSkills = [
-    { name: 'Java', level: 80 },
-    { name: 'Spring Boot', level: 75 },
+    { name: 'Java', level: 60 },
+    { name: 'Python', level: 75 },
     { name: 'PHP / Laravel', level: 70 },
     { name: 'Node.js', level: 65 }
   ];
 
   toolSkills = [
-    { name: 'MySQL / MongoDB', level: 80 },
+    { name: 'MySQL / MongoDB', level: 100 },
     { name: 'Git & GitHub', level: 90 },
-    { name: 'Docker', level: 60 },
+    { name: 'PostgreSQL', level: 60 },
     { name: 'Postman', level: 85 }
   ];
 }
