@@ -15,7 +15,7 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
           <h2 class="role" data-aos="fade-up" data-aos-delay="300">{{ 'hero.role' | translate }}</h2>
           <p class="description" data-aos="fade-up" data-aos-delay="400">
             Building performant, secure, and beautiful web experiences.
-            Specialized in <span class="highlight">Angular</span> & <span class="highlight">Spring Boot</span>.
+            Specialized in <span class="highlight">Angular</span> & <span class="highlight">React.js</span>.
           </p>
           <div class="cta-buttons" data-aos="fade-up" data-aos-delay="500">
             <a href="assets/cv/CV.pdf" download class="btn btn-primary" aria-label="Download CV">
