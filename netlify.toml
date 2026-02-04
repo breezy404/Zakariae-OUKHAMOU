@@ -1,6 +1,6 @@
 [build]
   publish = "dist/zakaria-portfolio"
-  command = "npx ng build --configuration production"
+  command = "node ./node_modules/@angular/cli/bin/ng build --configuration production"
 
 [[redirects]]
   from = "/*"
