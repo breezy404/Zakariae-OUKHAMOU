@@ -11,7 +11,8 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <div class="logo">ZO.</div>
+          <img src="assets/images/logo.jpeg" alt="logo" width="50" height="50" class="logo">
+
             <p>{{ 'contact.subtitle' | translate }}</p>
           </div>
           

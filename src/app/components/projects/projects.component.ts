@@ -188,7 +188,7 @@ interface Project {
 
     .project-footer {
       display: flex;
-      gap: 1rem;
+      gap: 0.5rem;
       padding-top: 1rem;
       border-top: 1px solid var(--border-color);
       

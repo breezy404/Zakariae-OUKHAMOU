@@ -10,8 +10,8 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
   template: `
     <nav class="navbar" [class.scrolled]="isScrolled">
       <div class="container navbar-content">
-        <a href="#" class="logo">ZO.</a>
-        
+        <!-- <a href="#" class="logo">ZO.</a>-->
+       <img src="assets/images/logo.jpeg" alt="logo" width="50" height="50" class="logo">
         <div class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation">
           <span [class.open]="isMenuOpen"></span>
           <span [class.open]="isMenuOpen"></span>
@@ -75,7 +75,7 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
     .logo {
       font-size: 1.8rem;
       font-weight: 800;
-      color: var(--primary-color);
+      
       text-decoration: none;
       letter-spacing: -1px;
       transition: transform 0.3s ease;
