@@ -95,7 +95,17 @@ export class TranslationService {
       fr: 'Plateforme full-stack permettant de consulter les événements, choisir ses billets en temps réel, réserver en toute sécurité et gérer les réservations avec reçus automatiques.'
     },
 
-    // Project 3: Charity Association
+    // Project 3: Chgouri Car
+    'project.chgouri.title': {
+      en: 'Chgouri Car – Car Rental Platform',
+      fr: 'Chgouri Car – Location de Voitures'
+    },
+    'project.chgouri.desc': {
+      en: 'Full-stack web application for car rental services, featuring an online vehicle booking engine, real-time fleet availability, dynamic pricing, and an intuitive customer reservation workflow.',
+      fr: 'Application web full-stack de location de voitures intégrant un système de réservation en ligne, la disponibilité des véhicules en temps réel, une tarification dynamique et un suivi complet des réservations.'
+    },
+
+    // Project 4: Charity Association
     'project.charity.title': {
       en: 'Association Oulad Lkhir Platform',
       fr: 'Plateforme Association Oulad Lkhir'

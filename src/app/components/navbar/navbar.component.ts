@@ -40,7 +40,7 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
           </ul>
 
           <div class="nav-actions">
-            <a [href]="cvUrl()" download class="btn btn-outline btn-sm cv-btn" aria-label="Download CV">
+            <a [attr.href]="cvUrl()" download class="btn btn-outline btn-sm cv-btn" aria-label="Download CV">
               <i class="fa-solid fa-file-arrow-down"></i>
               <span>{{ 'nav.cv' | translate }}</span>
             </a>

@@ -27,7 +27,7 @@ import { TranslationService } from '../../services/translation.service';
           </p>
 
           <div class="hero-cta">
-            <a [href]="cvUrl()" download class="btn btn-primary" aria-label="Download CV">
+            <a [attr.href]="cvUrl()" download class="btn btn-primary" aria-label="Download CV">
               <i class="fa-solid fa-file-arrow-down"></i>
               <span>{{ 'hero.cv' | translate }}</span>
             </a>

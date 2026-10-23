@@ -70,7 +70,7 @@ interface Project {
                 <span class="browser-dot red"></span>
                 <span class="browser-dot yellow"></span>
                 <span class="browser-dot green"></span>
-                <span class="browser-url">{{ project.id }}.app</span>
+                <span class="browser-url">{{ getProjectDomain(project) }}</span>
               </div>
 
               <div class="project-image-box">
@@ -359,12 +359,15 @@ interface Project {
 
     .card-footer {
       display: flex;
+      flex-wrap: wrap;
       gap: 0.75rem;
       padding-top: 1.25rem;
       border-top: 1px solid var(--border-color);
+      margin-top: auto;
 
       .btn {
         flex: 1;
+        min-width: 120px;
         font-size: 0.85rem;
       }
     }
@@ -407,6 +410,17 @@ export class ProjectsComponent {
       githubLink: 'https://github.com/breezy404'
     },
     {
+      id: 'chgouri-car',
+      titleKey: 'project.chgouri.title',
+      descKey: 'project.chgouri.desc',
+      image: 'assets/images/ChgouriCar.jpg',
+      category: 'react',
+      technologies: ['React.js', 'Node.js', 'MySQL', 'Bootstrap'],
+      highlights: ['Online Vehicle Booking', 'Fleet Availability System', 'Reservation Management'],
+      liveLink: 'https://www.chgouricar.com',
+      githubLink: 'https://github.com/breezy404/CHGOURI-CAR.git'
+    },
+    {
       id: 'oulad-lkhir',
       titleKey: 'project.charity.title',
       descKey: 'project.charity.desc',
@@ -426,5 +440,16 @@ export class ProjectsComponent {
 
   setCategory(category: ProjectCategory) {
     this.selectedCategory.set(category);
+  }
+
+  getProjectDomain(project: Project): string {
+    if (project.liveLink) {
+      try {
+        return new URL(project.liveLink).hostname;
+      } catch {
+        return project.id + '.app';
+      }
+    }
+    return project.id + '.app';
   }
 }

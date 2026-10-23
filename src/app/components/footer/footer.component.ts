@@ -67,7 +67,7 @@ import { TranslationService } from '../../services/translation.service';
                 <i class="fa-brands fa-whatsapp"></i>
               </a>
             </div>
-            <a [href]="cvUrl()" download class="footer-cv-link">
+            <a [attr.href]="cvUrl()" download class="footer-cv-link">
               <i class="fa-solid fa-file-arrow-down"></i>
               {{ 'hero.cv' | translate }}
             </a>
