@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslationService, Lang } from '../../services/translation.service';
+import { TranslationService } from '../../services/translation.service';
 import { AppTranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
@@ -8,42 +8,65 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, AppTranslatePipe],
   template: `
-    <nav class="navbar" [class.scrolled]="isScrolled">
+    <header class="navbar" [class.scrolled]="isScrolled">
       <div class="container navbar-content">
-        <!-- <a href="#" class="logo">ZO.</a>-->
-       <img src="assets/images/logo.jpeg" alt="logo" width="50" height="50" class="logo">
-        <div class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation">
-          <span [class.open]="isMenuOpen"></span>
-          <span [class.open]="isMenuOpen"></span>
-          <span [class.open]="isMenuOpen"></span>
-        </div>
+        <a href="#home" class="logo-link" aria-label="Zakariae OUKHAMOU Homepage">
+          <div class="logo-badge">
+            <span class="logo-code">&lt;</span>
+            <span class="logo-text">ZO</span>
+            <span class="logo-code">/&gt;</span>
+          </div>
+          <span class="logo-name">Zakariae<span class="dot">.</span></span>
+        </a>
 
-        <ul class="nav-links" [class.active]="isMenuOpen">
-          <li><a href="#about" (click)="closeMenu()" [class.active]="activeSection === 'about'">{{ 'nav.about' | translate }}</a></li>
-          <li><a href="#skills" (click)="closeMenu()" [class.active]="activeSection === 'skills'">{{ 'nav.skills' | translate }}</a></li>
-          <li><a href="#projects" (click)="closeMenu()" [class.active]="activeSection === 'projects'">{{ 'nav.projects' | translate }}</a></li>
-          <li><a href="#contact" (click)="closeMenu()" [class.active]="activeSection === 'contact'">{{ 'nav.contact' | translate }}</a></li>
-          
-          <li class="nav-cta-mobile">
-            <a href="assets/cv/CV.pdf" download class="btn btn-primary btn-sm">
-              <i class="fa-solid fa-file"></i> {{ 'nav.cv' | translate }}
-            </a>
-          </li>
+        <button 
+          class="menu-toggle" 
+          (click)="toggleMenu()" 
+          [attr.aria-expanded]="isMenuOpen" 
+          aria-label="Toggle navigation menu"
+          type="button">
+          <span [class.open]="isMenuOpen"></span>
+          <span [class.open]="isMenuOpen"></span>
+          <span [class.open]="isMenuOpen"></span>
+        </button>
 
-          <li class="actions">
-            <a href="assets/cv/CV.pdf" download class="btn btn-outline btn-sm cv-btn-desktop" aria-label="Download CV">
-              <i class="fa-solid fa-file"></i> {{ 'nav.cv' | translate }}
+        <nav class="nav-links" [class.active]="isMenuOpen" aria-label="Main Navigation">
+          <ul class="nav-list">
+            <li><a href="#about" (click)="closeMenu()" [class.active]="activeSection === 'about'">{{ 'nav.about' | translate }}</a></li>
+            <li><a href="#skills" (click)="closeMenu()" [class.active]="activeSection === 'skills'">{{ 'nav.skills' | translate }}</a></li>
+            <li><a href="#projects" (click)="closeMenu()" [class.active]="activeSection === 'projects'">{{ 'nav.projects' | translate }}</a></li>
+            <li><a href="#education" (click)="closeMenu()" [class.active]="activeSection === 'education'">{{ 'nav.education' | translate }}</a></li>
+            <li><a href="#contact" (click)="closeMenu()" [class.active]="activeSection === 'contact'">{{ 'nav.contact' | translate }}</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <a [href]="cvUrl()" download class="btn btn-outline btn-sm cv-btn" aria-label="Download CV">
+              <i class="fa-solid fa-file-arrow-down"></i>
+              <span>{{ 'nav.cv' | translate }}</span>
             </a>
-            <button class="icon-btn theme-toggle" (click)="toggleTheme()" [title]="isDarkMode ? 'Light Mode' : 'Dark Mode'">
-              {{ isDarkMode ? '☀️' : '🌙' }}
+
+            <button 
+              type="button" 
+              class="icon-btn theme-toggle" 
+              (click)="toggleTheme()" 
+              [title]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
+              aria-label="Toggle dark/light mode">
+              <i class="fa-solid" [class.fa-sun]="isDarkMode" [class.fa-moon]="!isDarkMode"></i>
             </button>
-            <button class="icon-btn lang-toggle" (click)="toggleLang()" title="Switch Language">
-              {{ currentLang().toUpperCase() }}
+
+            <button 
+              type="button" 
+              class="icon-btn lang-toggle" 
+              (click)="toggleLang()" 
+              title="Switch Language (EN/FR)"
+              aria-label="Toggle language">
+              <span class="lang-text">{{ currentLang().toUpperCase() }}</span>
             </button>
-          </li>
-        </ul>
+          </div>
+        </nav>
       </div>
-    </nav>
+      <div class="mobile-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()"></div>
+    </header>
   `,
   styles: [`
     .navbar {
@@ -52,15 +75,15 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
       left: 0;
       width: 100%;
       z-index: 1000;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      padding: 1.5rem 0;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 1.25rem 0;
       background: transparent;
 
       &.scrolled {
         background: var(--navbar-bg);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
         padding: 0.75rem 0;
         border-bottom: 1px solid var(--border-color);
       }
@@ -72,33 +95,67 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
       align-items: center;
     }
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
       text-decoration: none;
-      letter-spacing: -1px;
-      transition: transform 0.3s ease;
-      position: relative;
+      color: var(--text-color);
+      font-weight: 700;
+      font-size: 1.25rem;
       z-index: 1002;
 
-      &:hover { transform: scale(1.05); }
+      .logo-badge {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: monospace;
+        font-weight: 800;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        transition: transform 0.3s ease;
+
+        .logo-code { opacity: 0.8; font-size: 0.8rem; }
+        .logo-text { font-weight: 900; margin: 0 1px; }
+      }
+
+      .logo-name {
+        letter-spacing: -0.5px;
+        .dot { color: var(--primary-color); }
+      }
+
+      &:hover .logo-badge {
+        transform: scale(1.08) rotate(2deg);
+      }
     }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
-      list-style: none;
+      gap: 2.25rem;
       align-items: center;
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      gap: 1.75rem;
+      align-items: center;
+      margin: 0;
+      padding: 0;
 
       a {
         text-decoration: none;
         color: var(--text-color);
         font-weight: 500;
         font-size: 0.95rem;
-        transition: all 0.3s ease;
+        transition: color 0.25s ease;
         position: relative;
-        padding: 0.5rem 0;
+        padding: 0.5rem 0.25rem;
 
         &::after {
           content: '';
@@ -106,8 +163,9 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
           bottom: 0;
           left: 0;
           width: 0;
-          height: 2px;
-          background: var(--primary-color);
+          height: 2.5px;
+          border-radius: 2px;
+          background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
           transition: width 0.3s ease;
         }
 
@@ -116,79 +174,28 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
           &::after { width: 100%; }
         }
       }
-
-      .actions {
-        display: flex;
-        gap: 0.75rem;
-        align-items: center;
-        margin-left: 1rem;
-        padding-left: 1.5rem;
-        border-left: 1px solid var(--border-color);
-      }
     }
 
-    .btn-sm {
+    .nav-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      padding-left: 1.5rem;
+      border-left: 1px solid var(--border-color);
+    }
+
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-      border-radius: 0.5rem;
-    }
-
-    .nav-cta-mobile { display: none; }
-
-    /* Mobile & Tablet Menu (< 1024px) */
-    @media (max-width: 1024px) {
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 100%;
-        max-width: 100%;
-        background: var(--bg-color);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000;
-        padding: 2rem;
-        gap: 2.5rem;
-
-        &.active { right: 0; }
-
-        a {
-          font-size: 1.5rem;
-          font-weight: 600;
-        }
-
-        .actions {
-          border-left: none;
-          margin-left: 0;
-          padding-left: 0;
-          flex-direction: row;
-          justify-content: center;
-          gap: 1.5rem;
-          margin-top: 1rem;
-        }
-
-        .cv-btn-desktop { display: none; }
-        .nav-cta-mobile { 
-          display: block; 
-          margin-top: 1rem;
-          
-          .btn {
-            font-size: 1.1rem;
-            padding: 0.75rem 2rem;
-          }
-        }
-      }
-      
-      .menu-toggle {
-        display: flex !important;
-      }
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 0.65rem;
     }
 
     .icon-btn {
-      background: transparent;
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
       width: 40px;
       height: 40px;
@@ -198,21 +205,23 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
       border-radius: 10px;
       cursor: pointer;
       color: var(--text-color);
-      transition: all 0.3s ease;
-      
+      transition: all 0.25s ease;
+      font-size: 0.95rem;
+
       &:hover {
-        background: var(--card-bg);
+        background: var(--bg-color);
         border-color: var(--primary-color);
         color: var(--primary-color);
         transform: translateY(-2px);
       }
+
+      .lang-text {
+        font-weight: 800;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+      }
     }
 
-    .lang-toggle {
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-    
     .menu-toggle {
       display: none;
       flex-direction: column;
@@ -220,72 +229,146 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
       cursor: pointer;
       z-index: 1002;
       padding: 0.5rem;
-      border-radius: 50%;
+      border: none;
       background: transparent;
-      transition: background 0.3s;
-      
-      &:hover { background: var(--card-bg); }
-      
+      border-radius: 8px;
+
       span {
+        display: block;
         width: 26px;
-        height: 2px;
+        height: 2.5px;
         background-color: var(--text-color);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border-radius: 2px;
 
-        &.open:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 28px; }
-        &.open:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-        &.open:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 28px; }
+        &.open:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+        &.open:nth-child(2) { opacity: 0; transform: translateX(-8px); }
+        &.open:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+      }
+    }
+
+    .mobile-backdrop {
+      display: none;
+    }
+
+    @media (max-width: 1024px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: min(85vw, 360px);
+        background: var(--bg-color);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 6rem 2rem 2.5rem;
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.15);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1001;
+        overflow-y: auto;
+        border-left: 1px solid var(--border-color);
+
+        &.active {
+          right: 0;
+        }
+      }
+
+      .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        width: 100%;
+
+        li { width: 100%; }
+
+        a {
+          display: block;
+          font-size: 1.2rem;
+          font-weight: 600;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+      }
+
+      .nav-actions {
+        border-left: none;
+        padding-left: 0;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: flex-start;
+
+        .cv-btn {
+          width: 100%;
+          justify-content: center;
+          padding: 0.85rem;
+          font-size: 1rem;
+        }
+      }
+
+      .mobile-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
       }
     }
   `]
 })
 export class NavbarComponent {
-  translationService = inject(TranslationService);
+  private translationService = inject(TranslationService);
 
   isScrolled = false;
   isMenuOpen = false;
   isDarkMode = false;
   activeSection = '';
 
+  cvUrl = this.translationService.cvUrl;
+
   get currentLang() {
     return this.translationService.currentLang;
   }
 
   constructor() {
-    // Scroll listener for sticky effect
-    window.addEventListener('scroll', () => {
-      this.isScrolled = window.scrollY > 20;
-    });
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', () => {
+        this.isScrolled = window.scrollY > 20;
+      }, { passive: true });
 
-    // Theme persistence
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      this.isDarkMode = savedTheme === 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      this.isDarkMode = true;
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        this.isDarkMode = savedTheme === 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.isDarkMode = true;
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
 
-    // Intersection Observer for active section
-    if (typeof IntersectionObserver !== 'undefined') {
-      const options = { threshold: 0.5 };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            this.activeSection = entry.target.id;
-          }
-        });
-      }, options);
+      if (typeof IntersectionObserver !== 'undefined') {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              this.activeSection = entry.target.id;
+            }
+          });
+        }, { threshold: 0.4 });
 
-      // Wait for view init or use setTimeout as a simplified approach for this standalone component
-      setTimeout(() => {
-        ['about', 'skills', 'projects', 'contact'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) observer.observe(el);
-        });
-      }, 500);
+        setTimeout(() => {
+          ['home', 'about', 'skills', 'projects', 'education', 'contact'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+          });
+        }, 600);
+      }
     }
   }
 
@@ -297,17 +380,21 @@ export class NavbarComponent {
   }
 
   toggleLang() {
-    const newLang = this.currentLang() === 'en' ? 'fr' : 'en';
-    this.translationService.setLanguage(newLang);
+    const nextLang = this.currentLang() === 'en' ? 'fr' : 'en';
+    this.translationService.setLanguage(nextLang);
   }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+    }
   }
 
   closeMenu() {
     this.isMenuOpen = false;
-    document.body.style.overflow = 'auto';
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'auto';
+    }
   }
 }

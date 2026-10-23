@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppTranslatePipe } from '../../pipes/translate.pipe';
 
+export type ProjectCategory = 'all' | 'angular' | 'react' | 'laravel';
+
 interface Project {
-  title: string;
-  description: string;
+  id: string;
+  titleKey: string;
+  descKey: string;
   image: string;
+  category: ProjectCategory;
   technologies: string[];
+  highlights: string[];
   liveLink?: string;
   githubLink?: string;
 }
@@ -18,34 +23,121 @@ interface Project {
   template: `
     <section id="projects" class="projects-section">
       <div class="container">
-        <h2 class="section-title">{{ 'sect.projects' | translate }}</h2>
+        <h2 class="section-title" data-aos="fade-up">{{ 'sect.projects' | translate }}</h2>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" data-aos="fade-up" data-aos-delay="100">
+          <button 
+            type="button"
+            class="tab-btn" 
+            [class.active]="selectedCategory() === 'all'"
+            (click)="setCategory('all')">
+            {{ 'projects.filter.all' | translate }}
+          </button>
+          <button 
+            type="button"
+            class="tab-btn" 
+            [class.active]="selectedCategory() === 'angular'"
+            (click)="setCategory('angular')">
+            {{ 'projects.filter.angular' | translate }}
+          </button>
+          <button 
+            type="button"
+            class="tab-btn" 
+            [class.active]="selectedCategory() === 'react'"
+            (click)="setCategory('react')">
+            {{ 'projects.filter.react' | translate }}
+          </button>
+          <button 
+            type="button"
+            class="tab-btn" 
+            [class.active]="selectedCategory() === 'laravel'"
+            (click)="setCategory('laravel')">
+            {{ 'projects.filter.laravel' | translate }}
+          </button>
+        </div>
+
+        <!-- Projects Grid -->
         <div class="projects-grid">
-          <div class="project-card" *ngFor="let project of projects; let i = index" data-aos="zoom-in-up" [attr.data-aos-delay]="100 + (i * 100)">
-            <div class="project-image">
-              <div class="placeholder-img">{{ project.title[0] }}</div>
-              <div class="project-overlay">
-                <div class="overlay-links">
-                  <a *ngIf="project.githubLink" [href]="project.githubLink" target="_blank" class="icon-link" title="Source Code">
-                    <i class="fa-brands fa-github"></i>
-                  </a>
-                  <a *ngIf="project.liveLink" [href]="project.liveLink" target="_blank" class="icon-link" title="Live Demo">
-                    <i class="fa-solid fa-link"></i>
-                  </a>
+          <div 
+            class="project-card" 
+            *ngFor="let project of filteredProjects(); let i = index" 
+            data-aos="fade-up" 
+            [attr.data-aos-delay]="100 + (i * 100)">
+            
+            <div class="browser-frame">
+              <div class="browser-bar">
+                <span class="browser-dot red"></span>
+                <span class="browser-dot yellow"></span>
+                <span class="browser-dot green"></span>
+                <span class="browser-url">{{ project.id }}.app</span>
+              </div>
+
+              <div class="project-image-box">
+                <img 
+                  [src]="project.image" 
+                  [alt]="project.titleKey | translate" 
+                  loading="lazy">
+                
+                <div class="image-overlay">
+                  <div class="overlay-actions">
+                    <a 
+                      *ngIf="project.githubLink" 
+                      [href]="project.githubLink" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="overlay-btn" 
+                      title="View GitHub Repository"
+                      aria-label="View Source Code on GitHub">
+                      <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a 
+                      *ngIf="project.liveLink" 
+                      [href]="project.liveLink" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="overlay-btn" 
+                      title="Live Preview"
+                      aria-label="View Live Project">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="project-content">
-              <h3>{{ project.title }}</h3>
-              <p>{{ project.description }}</p>
-              <div class="tech-stack">
-                <span class="tech-chip" *ngFor="let tech of project.technologies">{{ tech }}</span>
+
+            <div class="project-body">
+              <h3 class="project-title">{{ project.titleKey | translate }}</h3>
+              <p class="project-description">{{ project.descKey | translate }}</p>
+
+              <div class="project-highlights">
+                <span class="highlight-chip" *ngFor="let hl of project.highlights">
+                  <i class="fa-solid fa-check"></i> {{ hl }}
+                </span>
               </div>
-              <div class="project-footer">
-                <a *ngIf="project.liveLink" [href]="project.liveLink" target="_blank" class="btn btn-primary btn-sm">
-                  {{ 'projects.viewLive' | translate }}
+
+              <div class="tech-stack">
+                <span class="tech-tag" *ngFor="let tech of project.technologies">{{ tech }}</span>
+              </div>
+
+              <div class="card-footer">
+                <a 
+                  *ngIf="project.liveLink" 
+                  [href]="project.liveLink" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="btn btn-primary btn-sm">
+                  <i class="fa-solid fa-eye"></i>
+                  <span>{{ 'projects.viewLive' | translate }}</span>
                 </a>
-                <a *ngIf="project.githubLink" [href]="project.githubLink" target="_blank" class="btn btn-outline btn-sm">
-                  {{ 'projects.viewCode' | translate }}
+                <a 
+                  *ngIf="project.githubLink" 
+                  [href]="project.githubLink" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="btn btn-outline btn-sm">
+                  <i class="fa-brands fa-github"></i>
+                  <span>{{ 'projects.viewCode' | translate }}</span>
                 </a>
               </div>
             </div>
@@ -57,209 +149,282 @@ interface Project {
   styles: [`
     .projects-section {
       background-color: var(--card-bg);
+      position: relative;
     }
-    
+
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+
+      .tab-btn {
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        padding: 0.6rem 1.35rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+
+        &:hover {
+          border-color: var(--primary-color);
+          color: var(--primary-color);
+          transform: translateY(-2px);
+        }
+
+        &.active {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: white;
+          border-color: transparent;
+          box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+        }
+      }
+    }
+
     .projects-grid {
       display: grid;
-      /* Adjusted for better responsiveness */
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 2.5rem;
     }
 
     .project-card {
       background: var(--bg-color);
       border-radius: 1.5rem;
-      overflow: hidden;
       border: 1px solid var(--border-color);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 
       &:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        transform: translateY(-8px);
         border-color: var(--primary-color);
-        
-        .project-overlay { opacity: 1; }
-        .placeholder-img { transform: scale(1.1); }
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+        .image-overlay { opacity: 1; }
+        .project-image-box img { transform: scale(1.06); }
       }
     }
 
-    .project-image {
-      height: 220px;
-      position: relative;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+    .browser-frame {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+
+    .browser-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 6px;
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+
+      .browser-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        &.red { background: #ef4444; }
+        &.yellow { background: #f59e0b; }
+        &.green { background: #10b981; }
+      }
+
+      .browser-url {
+        margin-left: 0.75rem;
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        background: var(--bg-color);
+        padding: 0.15rem 0.6rem;
+        border-radius: 4px;
+        border: 1px solid var(--border-color);
+      }
+    }
+
+    .project-image-box {
+      height: 220px;
+      position: relative;
       overflow: hidden;
-      
+      background: #0f172a;
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-      
-      .placeholder-img {
-        font-size: 5rem;
-        font-weight: 800;
-        color: var(--primary-color);
-        opacity: 0.2;
-        transition: transform 0.5s ease;
+        object-position: top center;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .project-overlay {
+      .image-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(37, 99, 235, 0.9);
+        background: rgba(15, 23, 42, 0.7);
         backdrop-filter: blur(4px);
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
         transition: opacity 0.3s ease;
-        z-index: 10;
 
-        .overlay-links {
+        .overlay-actions {
           display: flex;
-          gap: 1.5rem;
-          
-          .icon-link {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.25rem;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            
-            &:hover { transform: scale(1.1); color: var(--primary-color); }
+          gap: 1rem;
+        }
+
+        .overlay-btn {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: white;
+          color: #0f172a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.25rem;
+          text-decoration: none;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+          transition: transform 0.25s ease, background-color 0.25s;
+
+          &:hover {
+            transform: scale(1.12);
+            background: var(--primary-color);
+            color: white;
           }
         }
       }
     }
 
-    .project-content {
-      padding: 2rem;
-      flex-grow: 1;
+    .project-body {
+      padding: 1.75rem;
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
 
-      h3 {
-        margin-bottom: 0.75rem;
-        font-size: 1.4rem;
+      .project-title {
+        font-size: 1.3rem;
+        font-weight: 700;
         color: var(--text-color);
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
       }
-      
-      p {
+
+      .project-description {
         color: var(--text-muted);
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        font-size: 0.925rem;
+        line-height: 1.65;
+        margin-bottom: 1.25rem;
+      }
+    }
+
+    .project-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+
+      .highlight-chip {
+        font-size: 0.75rem;
+        background: rgba(37, 99, 235, 0.08);
+        color: var(--primary-color);
+        padding: 0.25rem 0.6rem;
+        border-radius: 6px;
+        font-weight: 600;
+
+        i { font-size: 0.7rem; }
       }
     }
 
     .tech-stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
+      gap: 0.45rem;
       margin-top: auto;
+      margin-bottom: 1.5rem;
+
+      .tech-tag {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        padding: 0.3rem 0.7rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
     }
 
-    .tech-chip {
-      background: var(--card-bg);
-      color: var(--text-color);
-      padding: 0.35rem 0.85rem;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      border: 1px solid var(--border-color);
-    }
-
-    .project-footer {
+    .card-footer {
       display: flex;
-      gap: 0.5rem;
-      padding-top: 1rem;
+      gap: 0.75rem;
+      padding-top: 1.25rem;
       border-top: 1px solid var(--border-color);
-      
-      .btn { flex: 1; }
+
+      .btn {
+        flex: 1;
+        font-size: 0.85rem;
+      }
     }
-    
-    @media (max-width: 768px) {
+
+    @media (max-width: 576px) {
       .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-      }
-      
-      .project-card:hover {
-        /* On touch devices, disable hover lift to confusing shift, or keep it subtle */
-        transform: none;
-      }
-      
-      /* Make overlay always visible or accessible via button? 
-         For now, keeping hover/active behavior or relying on footer buttons */
-    }
-    
-    @media (max-width: 480px) {
-       .projects-grid {
         grid-template-columns: 1fr;
       }
-      
-      .project-image {
-        height: 180px;
-      }
-      
-      .project-content {
-        padding: 1.5rem;
-      }
-      
-      .project-footer {
+      .card-footer {
         flex-direction: column;
+      }
+      .project-image-box {
+        height: 190px;
       }
     }
   `]
 })
 export class ProjectsComponent {
+  selectedCategory = signal<ProjectCategory>('all');
+
   projects: Project[] = [
     {
-      title: 'Commercial Monitoring Dashboard',
-      description: 'A comprehensive dashboard for business analytics, tracking sales performance and KPIs in real-time.',
+      id: 'commercial-dashboard',
+      titleKey: 'project.com.title',
+      descKey: 'project.com.desc',
       image: 'assets/images/com.PNG',
-      technologies: ['Angular', 'Spring Boot', 'JWT', 'Chart.js'],
-      liveLink: '#',
+      category: 'angular',
+      technologies: ['Angular 17', 'Spring Boot', 'JWT Security', 'Chart.js', 'PostgreSQL'],
+      highlights: ['Real-time KPI Metrics', 'Role-Based Access (RBAC)', 'RESTful Endpoints'],
       githubLink: 'https://github.com/breezy404/Marrakech-Horizon'
     },
     {
-      title: 'Event & Ticket Reservation',
-      description: 'Platform allows users to browse events, book tickets securely, and manage reservations via a user-friendly interface.',
-      image: 'assets/events.jpg',
-      technologies: ['Angular', 'Java', 'MySQL'],
-      liveLink: '#',
-      githubLink: '#'
+      id: 'event-booking',
+      titleKey: 'project.events.title',
+      descKey: 'project.events.desc',
+      image: 'assets/images/events.jpg',
+      category: 'angular',
+      technologies: ['Angular', 'Spring Boot / Java', 'MySQL', 'Stripe Integration'],
+      highlights: ['Interactive Seat Selector', 'Secure Checkout', 'E-Ticket Generator'],
+      githubLink: 'https://github.com/breezy404'
     },
     {
-      title: 'Association Oulad lkhir',
-      description: 'Management system for travel agencies to handle bookings, customers, and travel packages efficiently.',
-      image: 'assets/travel.jpg',
-      technologies: ['PHP', 'Laravel', 'Bootstrap', 'MySQL'],
+      id: 'oulad-lkhir',
+      titleKey: 'project.charity.title',
+      descKey: 'project.charity.desc',
+      image: 'assets/images/oulad-lkhir.jpg',
+      category: 'laravel',
+      technologies: ['PHP', 'Laravel', 'MySQL', 'Bootstrap', 'Blade'],
+      highlights: ['Donation Campaign Tracking', 'Volunteer Portal', 'Impact Reports'],
       githubLink: 'https://github.com/breezy404/oulad-lkhir'
-    },
-    // {
-    //   title: 'Commercial Monitoring Dashboard',
-    //   description: 'Robust authentication service providing secure login, registration, and role-based access control.',
-    //   image: 'assets/auth.jpg',
-    //   technologies: ['Spring Security', 'JWT', 'Angular'],
-    //   githubLink: '#'
-    // }
+    }
   ];
+
+  filteredProjects = computed(() => {
+    const cat = this.selectedCategory();
+    if (cat === 'all') return this.projects;
+    return this.projects.filter(p => p.category === cat);
+  });
+
+  setCategory(category: ProjectCategory) {
+    this.selectedCategory.set(category);
+  }
 }

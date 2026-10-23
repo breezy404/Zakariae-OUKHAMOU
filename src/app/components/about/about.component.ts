@@ -10,24 +10,64 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
     <section id="about" class="about-section">
       <div class="container">
         <h2 class="section-title" data-aos="fade-up">{{ 'sect.about' | translate }}</h2>
-       <div class="about-grid">
-  <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
-    <div class="image-wrapper">
-      <img src="assets/images/photo.jpeg" alt="Zakariae OUKHAMOU Profile Picture" loading="lazy" width="280" height="280">
-    </div>
-  </div>
 
-          <div class="about-text" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-            <p class="lead">{{ 'about.text1' | translate }}</p>
-            <p>{{ 'about.text2' | translate }}</p>
-            <div class="about-stats">
-              <div class="stat-item">
-                <span class="stat-number">2+</span>
-                <span class="stat-label">Years Exp.</span>
+        <div class="about-grid">
+          <div class="about-image-col" data-aos="fade-right" data-aos-duration="900">
+            <div class="image-card">
+              <div class="image-frame">
+                <img 
+                  src="assets/images/photo.jpeg" 
+                  alt="Zakariae OUKHAMOU Profile Picture" 
+                  loading="lazy" 
+                  width="320" 
+                  height="320">
               </div>
-              <div class="stat-item">
-                <span class="stat-number">10+</span>
-                <span class="stat-label">Projects</span>
+              
+              <div class="experience-badge">
+                <i class="fa-solid fa-code"></i>
+                <div class="badge-text">
+                  <strong>Full-Stack</strong>
+                  <span>Developer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text-col" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+            <p class="lead">{{ 'about.text1' | translate }}</p>
+            <p class="description">{{ 'about.text2' | translate }}</p>
+
+            <div class="bento-stats">
+              <div class="bento-card">
+                <div class="bento-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="bento-data">
+                  <span class="bento-number">2+</span>
+                  <span class="bento-label">{{ 'about.stat.exp' | translate }}</span>
+                </div>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="bento-data">
+                  <span class="bento-number">10+</span>
+                  <span class="bento-label">{{ 'about.stat.projects' | translate }}</span>
+                </div>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="bento-data">
+                  <span class="bento-highlight">Spring & Angular</span>
+                  <span class="bento-label">{{ 'about.stat.code' | translate }}</span>
+                </div>
+              </div>
+
+              <div class="bento-card">
+                <div class="bento-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="bento-data">
+                  <span class="bento-highlight">Marrakech, MA</span>
+                  <span class="bento-label">{{ 'about.stat.location' | translate }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -44,120 +84,188 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
 
     .about-grid {
       display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 4rem;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: clamp(2.5rem, 5vw, 4.5rem);
       align-items: center;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
-      .about-image {
-        display: flex;
-        justify-content: center;
-        
-        .image-wrapper {
-          width: 280px;
-          height: 280px;
-          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-          border-radius: 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-          overflow: hidden;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 1.8rem;
-          }
-
-          &::after {
-            content: '';
-            position: absolute;
-            inset: -15px;
-            border: 2px solid var(--primary-color);
-            border-radius: 2.5rem;
-            opacity: 0.2;
-            z-index: -1;
-          }
-
-          .placeholder-avatar {
-            font-size: 5rem;
-            font-weight: 800;
-            color: white;
-            letter-spacing: -2px;
-          }
-        }
-      }
-
-      .about-text {
-        p {
-          margin-bottom: 1.5rem;
-          color: var(--text-muted);
-          font-size: 1.05rem;
-          
-          &.lead {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--text-color);
-            line-height: 1.6;
-          }
-        }
-      }
-
-    .about-stats {
+    .about-image-col {
       display: flex;
-      gap: 3rem;
-      margin-top: 2.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-color);
+      justify-content: center;
+    }
 
-      .stat-item {
+    .image-card {
+      position: relative;
+      width: clamp(240px, 30vw, 320px);
+      height: clamp(240px, 30vw, 320px);
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -12px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 2rem;
+        opacity: 0.35;
+        filter: blur(12px);
+        z-index: 0;
+      }
+    }
+
+    .image-frame {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 1.75rem;
+      overflow: hidden;
+      border: 3px solid var(--border-color);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      background: var(--bg-color);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    .experience-badge {
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      z-index: 2;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+      i {
+        font-size: 1.25rem;
+        color: var(--primary-color);
+      }
+
+      .badge-text {
         display: flex;
         flex-direction: column;
-        
-        .stat-number {
-          font-size: 2rem;
+        strong { font-size: 0.85rem; color: var(--text-color); line-height: 1.2; }
+        span { font-size: 0.75rem; color: var(--text-muted); }
+      }
+    }
+
+    .about-text-col {
+      .lead {
+        font-size: clamp(1.1rem, 2vw, 1.25rem);
+        font-weight: 500;
+        color: var(--text-color);
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+      }
+
+      .description {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.75;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .bento-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .bento-card {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 1.15rem;
+      padding: 1.25rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .bento-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        flex-shrink: 0;
+      }
+
+      .bento-data {
+        display: flex;
+        flex-direction: column;
+
+        .bento-number {
+          font-size: 1.5rem;
           font-weight: 700;
           color: var(--primary-color);
+          line-height: 1.1;
         }
-        
-        .stat-label {
-          font-size: 0.85rem;
+
+        .bento-highlight {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: var(--text-color);
+          line-height: 1.2;
+        }
+
+        .bento-label {
+          font-size: 0.775rem;
           color: var(--text-muted);
           font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 1px;
+          margin-top: 0.2rem;
         }
       }
     }
 
     @media (max-width: 992px) {
       .about-grid {
-        gap: 3rem;
-        grid-template-columns: 1fr 1fr;
-      }
-      .image-wrapper { width: 240px; height: 240px; }
-    }
-
-    @media (max-width: 768px) {
-      .about-grid {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 3rem;
       }
-      
-      .about-image { margin-bottom: 1rem; }
-      
-      .about-stats { 
-        justify-content: center; 
-        gap: 2rem;
-        flex-wrap: wrap; 
+
+      .bento-stats {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: left;
       }
-      
-      .about-image .image-wrapper { width: 220px; height: 220px; }
+    }
+
+    @media (max-width: 576px) {
+      .bento-stats {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }
+
+      .experience-badge {
+        bottom: -10px;
+        right: 0;
+      }
     }
   `]
 })
