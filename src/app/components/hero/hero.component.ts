@@ -144,11 +144,15 @@ import { TranslationService } from '../../services/translation.service';
       background: rgba(34, 197, 94, 0.1);
       border: 1px solid rgba(34, 197, 94, 0.25);
       color: #16a34a;
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
       border-radius: 999px;
-      font-size: 0.825rem;
+      font-size: clamp(0.725rem, 2.8vw, 0.825rem);
       font-weight: 600;
       margin-bottom: 1.25rem;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.35;
 
       [data-theme='dark'] & {
         background: rgba(34, 197, 94, 0.15);
@@ -163,6 +167,7 @@ import { TranslationService } from '../../services/translation.service';
         border-radius: 50%;
         box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
         animation: pulseDot 2s infinite;
+        flex-shrink: 0;
       }
     }
 
@@ -176,19 +181,20 @@ import { TranslationService } from '../../services/translation.service';
       display: block;
       color: var(--primary-color);
       font-weight: 600;
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .hero-name {
-      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-size: clamp(1.85rem, 6.5vw, 4.2rem);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.15;
       margin-bottom: 0.75rem;
-      letter-spacing: -1.5px;
+      letter-spacing: -1px;
       color: var(--text-color);
+      word-break: break-word;
 
       .gradient-text {
         background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -198,20 +204,22 @@ import { TranslationService } from '../../services/translation.service';
     }
 
     .hero-role {
-      font-size: clamp(1.25rem, 2.8vw, 1.9rem);
+      font-size: clamp(1.05rem, 3.5vw, 1.9rem);
       font-weight: 600;
       color: var(--text-color);
       opacity: 0.9;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.5px;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.3px;
+      line-height: 1.35;
+      word-break: break-word;
     }
 
     .hero-bio {
       color: var(--text-muted);
-      font-size: clamp(1rem, 1.5vw, 1.125rem);
-      line-height: 1.75;
+      font-size: clamp(0.925rem, 1.5vw, 1.125rem);
+      line-height: 1.7;
       max-width: 580px;
-      margin-bottom: 2.25rem;
+      margin-bottom: 2rem;
     }
 
     .hero-cta {
@@ -479,30 +487,39 @@ import { TranslationService } from '../../services/translation.service';
 
       .hero-visual {
         margin-top: 1rem;
+        width: 100%;
       }
 
-      .floating-badge.badge-ts {
-        right: 10px;
+      .floating-badge {
+        display: none; /* Hide floating badges under 992px to prevent horizontal overflow */
       }
     }
 
     @media (max-width: 576px) {
       .hero-section {
         padding-top: 5.5rem;
+        padding-bottom: 3.5rem;
       }
 
       .hero-cta {
         flex-direction: column;
         width: 100%;
+        gap: 0.75rem;
         .btn { width: 100%; }
       }
 
       .terminal-card {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
+        border-radius: 1rem;
       }
 
-      .floating-badge {
-        display: none; /* Avoid overflowing mobile screens */
+      .terminal-body {
+        padding: 1rem 0.85rem;
+        font-size: 0.72rem;
+      }
+
+      .scroll-indicator {
+        display: none; /* Hide on small screens to save vertical space */
       }
     }
   `]

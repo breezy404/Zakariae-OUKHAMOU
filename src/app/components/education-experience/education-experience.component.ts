@@ -423,29 +423,81 @@ interface TimelineItem {
 
     /* Responsive */
     @media (max-width: 680px) {
+      .section-header {
+        margin-bottom: 1.75rem;
+      }
+
+      .filter-wrapper {
+        margin-bottom: 2.25rem;
+      }
+
+      .filter-pills {
+        width: 100%;
+        display: flex;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .filter-pill {
+        flex: 1;
+        justify-content: center;
+        padding: 0.5rem 0.45rem;
+        font-size: 0.76rem;
+        gap: 0.3rem;
+        white-space: nowrap;
+
+        .count-badge {
+          padding: 0.1rem 0.35rem;
+          font-size: 0.68rem;
+        }
+      }
+
       .timeline-card {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.75rem;
       }
 
       .timeline-marker {
         flex-direction: row;
         align-items: center;
         .marker-line { display: none; }
+        .marker-dot {
+          width: 42px;
+          height: 42px;
+          font-size: 1rem;
+          border-radius: 12px;
+        }
       }
 
       .timeline-body {
-        padding: 1.5rem 1.25rem;
+        padding: 1.35rem 1.15rem;
+        border-radius: 1.25rem;
       }
 
-      .filter-pills {
-        width: 100%;
-        justify-content: space-between;
+      .body-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
       }
 
-      .filter-pill {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.8rem;
+      .timeline-title {
+        font-size: 1.15rem;
+      }
+
+      .timeline-meta {
+        font-size: 0.85rem;
+        gap: 0.75rem;
+      }
+
+      .task-list li {
+        font-size: 0.875rem;
+      }
+
+      .timeline-tech .tech-tag {
+        font-size: 0.72rem;
+        padding: 0.25rem 0.55rem;
       }
     }
   `]

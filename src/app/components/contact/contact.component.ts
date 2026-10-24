@@ -388,8 +388,56 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
     }
 
     @media (max-width: 576px) {
+      .contact-wrapper {
+        padding: 1.5rem 1.15rem;
+        border-radius: 1.25rem;
+        gap: 2.25rem;
+      }
+
+      .contact-info .info-title {
+        font-size: 1.35rem;
+      }
+
+      .contact-info .info-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .info-cards {
+        gap: 0.85rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .info-item {
+        padding: 0.85rem 1rem;
+        border-radius: 0.85rem;
+        gap: 0.75rem;
+
+        .item-icon {
+          width: 38px;
+          height: 38px;
+          font-size: 1rem;
+          border-radius: 10px;
+        }
+
+        .item-content .item-value {
+          font-size: 0.85rem;
+          word-break: break-all;
+        }
+      }
+
       .form-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .contact-form {
+        gap: 1rem;
+      }
+
+      .form-group input, .form-group textarea {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
       }
     }
   `]

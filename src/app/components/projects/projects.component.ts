@@ -187,7 +187,7 @@ interface Project {
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
       gap: 2.5rem;
     }
 
@@ -373,14 +373,33 @@ interface Project {
     }
 
     @media (max-width: 576px) {
+      .filter-tabs {
+        gap: 0.4rem;
+        margin-bottom: 2rem;
+        .tab-btn {
+          padding: 0.45rem 0.85rem;
+          font-size: 0.8rem;
+        }
+      }
       .projects-grid {
         grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .project-card {
+        border-radius: 1.25rem;
+      }
+      .project-body {
+        padding: 1.35rem 1.15rem;
+      }
+      .project-title {
+        font-size: 1.2rem;
       }
       .card-footer {
         flex-direction: column;
+        .btn { width: 100%; }
       }
       .project-image-box {
-        height: 190px;
+        height: 185px;
       }
     }
   `]

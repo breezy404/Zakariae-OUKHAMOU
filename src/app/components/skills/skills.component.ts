@@ -68,7 +68,7 @@ interface SkillCategory {
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
       gap: 2.25rem;
     }
 
@@ -196,9 +196,16 @@ interface SkillCategory {
     @media (max-width: 576px) {
       .skills-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
       .skill-category-card {
-        padding: 1.5rem;
+        padding: 1.35rem 1.15rem;
+        border-radius: 1.25rem;
+      }
+      .category-header {
+        margin-bottom: 1.5rem;
+        gap: 0.75rem;
+        h3 { font-size: 1.15rem; }
       }
     }
   `]

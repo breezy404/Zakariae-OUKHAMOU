@@ -60,7 +60,7 @@ import { TranslationService } from '../../services/translation.service';
                 <i class="fa-brands fa-instagram"></i>
               </a>
               <a 
-                href="https://wa.me/212600000000?text=Bonjour%20Zakariae" 
+                href="https://wa.me/212645348293?text=Bonjour%20Zakariae" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="WhatsApp">
