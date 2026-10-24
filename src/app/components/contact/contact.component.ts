@@ -20,11 +20,11 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
 
             <div class="info-cards">
               <!-- Email Card -->
-              <a href="mailto:zakriaoukhamou11@gmail.com" class="info-item">
+              <a href="mailto:zakariaoukhamou11@gmail.com" class="info-item">
                 <div class="item-icon"><i class="fa-solid fa-envelope"></i></div>
                 <div class="item-content">
                   <span class="item-label">{{ 'contact.email' | translate }}</span>
-                  <strong class="item-value">zakriaoukhamou11&#64;gmail.com</strong>
+                  <strong class="item-value">zakariaoukhamou11&#64;gmail.com</strong>
                 </div>
               </a>
 
@@ -39,7 +39,7 @@ import { AppTranslatePipe } from '../../pipes/translate.pipe';
 
               <!-- WhatsApp Card -->
               <a 
-                href="https://wa.me/212600000000?text=Bonjour%20Zakariae,%20j'ai%20consult%C3%A9%20votre%20portfolio%20et%20je%20souhaite%20vous%20contacter." 
+                href="https://wa.me/212645348293?text=Bonjour%20Zakariae,%20j'ai%20consult%C3%A9%20votre%20portfolio%20et%20je%20souhaite%20vous%20contacter." 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 class="info-item whatsapp-item">
@@ -427,7 +427,7 @@ export class ContactComponent {
           email: this.formData.email,
           subject: this.formData.subject || 'Portfolio Contact from ' + this.formData.name,
           message: this.formData.message,
-          to: 'zakriaoukhamou11@gmail.com'
+          to: 'zakariaoukhamou11@gmail.com'
         })
       });
 
@@ -438,14 +438,14 @@ export class ContactComponent {
       } else {
         // Fallback: open mailto
         this.submitStatus.set('success');
-        const mailtoUrl = `mailto:zakriaoukhamou11@gmail.com?subject=${encodeURIComponent(this.formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(this.formData.message + '\n\nFrom: ' + this.formData.name + ' (' + this.formData.email + ')')}`;
+        const mailtoUrl = `mailto:zakariaoukhamou11@gmail.com?subject=${encodeURIComponent(this.formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(this.formData.message + '\n\nFrom: ' + this.formData.name + ' (' + this.formData.email + ')')}`;
         window.open(mailtoUrl, '_blank');
         this.resetForm();
       }
     } catch {
       // Fallback directly to mailto
       this.submitStatus.set('success');
-      const mailtoUrl = `mailto:zakriaoukhamou11@gmail.com?subject=${encodeURIComponent(this.formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(this.formData.message + '\n\nFrom: ' + this.formData.name + ' (' + this.formData.email + ')')}`;
+      const mailtoUrl = `mailto:zakariaoukhamou11@gmail.com?subject=${encodeURIComponent(this.formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(this.formData.message + '\n\nFrom: ' + this.formData.name + ' (' + this.formData.email + ')')}`;
       window.open(mailtoUrl, '_blank');
       this.resetForm();
     } finally {

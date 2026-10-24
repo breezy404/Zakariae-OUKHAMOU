@@ -116,31 +116,91 @@ export class TranslationService {
     },
 
     // Education & Experience
-    'edu.bts': {
-      en: 'BTS – Full-Stack Web Development',
-      fr: 'BTS – Développement Web Full-Stack'
+    'sect.edu.subtitle': {
+      en: 'My academic background and professional journey in software engineering',
+      fr: 'Mon parcours académique et mes expériences professionnelles en ingénierie logicielle'
     },
-    'edu.bts.school': {
-      en: 'Lycée Technique / Centre BTS • Marrakech',
-      fr: 'Lycée Technique / Centre BTS • Marrakech'
+    'timeline.filter.all': { en: 'All Journey', fr: 'Tout le Parcours' },
+    'timeline.filter.work': { en: 'Experience', fr: 'Expériences Pro' },
+    'timeline.filter.edu': { en: 'Education', fr: 'Formation & Diplômes' },
+
+    'timeline.badge.intern': { en: 'Internship', fr: 'Stage' },
+    'timeline.badge.degree': { en: 'University Degree', fr: 'Diplôme Universitaire' },
+    'timeline.badge.bts': { en: 'State Diploma', fr: 'Diplôme d’État' },
+    'timeline.badge.bac': { en: 'Baccalaureate', fr: 'Baccalauréat' },
+
+    // Experience 1: SSMTM
+    'exp.ssmtm.role': { en: 'Web Developer Intern', fr: 'Stagiaire Développeur Web' },
+    'exp.ssmtm.company': { en: 'SSMTM', fr: 'SSMTM' },
+    'exp.ssmtm.location': { en: 'Marrakech, Morocco', fr: 'Marrakech, Maroc' },
+    'exp.ssmtm.period': { en: '04/2026 – 09/2026', fr: '04/2026 – 09/2026' },
+    'exp.ssmtm.desc': {
+      en: 'Participated in full-stack web application development, debugging, and continuous feature enhancements.',
+      fr: 'Participation au développement full-stack, au débogage et à l’amélioration continue d’applications web.'
     },
-    'edu.bts.period': { en: '2024 - 2026', fr: '2024 - 2026' },
+    'exp.ssmtm.p1': {
+      en: 'Participated in the development and improvement of web applications.',
+      fr: 'Participation au développement et à l’amélioration des applications web.'
+    },
+    'exp.ssmtm.p2': {
+      en: 'Worked with React.js, Node.js, and MySQL database management.',
+      fr: 'Développement avec React.js, Node.js et gestion de base de données MySQL.'
+    },
+    'exp.ssmtm.p3': {
+      en: 'Contributed to development tasks, debugging, and application improvements based on project requirements.',
+      fr: 'Contribution aux tâches de développement, débogage et amélioration applicative selon les besoins du projet.'
+    },
+
+    // Experience 2: Insight Solutions
+    'exp.insight.role': { en: 'Web Developer Intern', fr: 'Stagiaire Développeur Web' },
+    'exp.insight.company': { en: 'Insight Solutions', fr: 'Insight Solutions' },
+    'exp.insight.location': { en: 'Rabat, Morocco', fr: 'Rabat, Maroc' },
+    'exp.insight.period': { en: '06/2025 – 08/2025', fr: '06/2025 – 08/2025' },
+    'exp.insight.desc': {
+      en: 'Contributed to a commercial monitoring web application with ERP integration and data reporting.',
+      fr: 'Contribution à une application web de monitoring commercial avec intégration ERP et reporting.'
+    },
+    'exp.insight.p1': {
+      en: 'Contributed to the development of a commercial monitoring web application.',
+      fr: 'Contribution au développement d’une application web de monitoring commercial.'
+    },
+    'exp.insight.p2': {
+      en: 'Used React.js and Node.js to implement responsive web application features.',
+      fr: 'Utilisation de React.js et Node.js pour implémenter les fonctionnalités de l’application web.'
+    },
+    'exp.insight.p3': {
+      en: 'Worked with PostgreSQL and Odoo to support business monitoring and reporting functionalities.',
+      fr: 'Travail avec PostgreSQL et Odoo pour soutenir le suivi d’activité et le reporting décisionnel.'
+    },
+
+    // Education 1: Bachelor in Data Science
+    'edu.bachelor.degree': { en: 'Bachelor’s Degree in Data Science', fr: 'Licence en Science des Données' },
+    'edu.bachelor.school': { en: 'École Supérieure de Technologie (EST)', fr: 'École Supérieure de Technologie (EST)' },
+    'edu.bachelor.location': { en: 'El Kelaâ des Sraghna, Morocco', fr: 'El Kelaâ des Sraghna, Maroc' },
+    'edu.bachelor.period': { en: '2026 – Present', fr: '2026 – Présent' },
+    'edu.bachelor.desc': {
+      en: 'Higher academic curriculum focusing on Data Science foundations, statistical modeling, machine learning, Python programming, and enterprise databases.',
+      fr: 'Cursus universitaire supérieur axé sur les fondements de la Data Science, la modélisation statistique, le Machine Learning, la programmation Python et les bases de données.'
+    },
+
+    // Education 2: BTS in Full Stack Web Development
+    'edu.bts.degree': { en: 'BTS in Full Stack Web Development', fr: 'BTS en Développement Web Full Stack' },
+    'edu.bts.school': { en: 'Centre BTS Mohammed VI', fr: 'Centre BTS Mohammed VI' },
+    'edu.bts.location': { en: 'Marrakech, Morocco', fr: 'Marrakech, Maroc' },
+    'edu.bts.period': { en: '09/2024 – 06/2026', fr: '09/2024 – 06/2026' },
     'edu.bts.desc': {
-      en: 'In-depth professional curriculum: Object-Oriented Programming (Java, PHP), Modern Web Frameworks (Angular, Spring Boot), Database Architecture (UML, SQL, NoSQL), and software design patterns.',
-      fr: 'Formation professionnelle approfondie : Programmation Orientée Objet (Java, PHP), Frameworks modernes (Angular, Spring Boot), Conception de bases de données (UML, SQL, NoSQL) et design patterns logiciels.'
+      en: 'Two-year intensive technical degree: Object-Oriented Programming (Java, PHP, C), modern web stacks (React.js, Angular, Node.js, Laravel), RESTful APIs, and database modeling (MySQL, PostgreSQL, UML).',
+      fr: 'Formation technique d’excellence de 2 ans : Programmation Orientée Objet (Java, PHP, C), architectures web (React.js, Angular, Node.js, Laravel), API REST et modélisation de bases de données (MySQL, PostgreSQL, UML).'
     },
-    'exp.intern': {
-      en: 'Full-Stack Developer Internship',
-      fr: 'Stage Développeur Full-Stack'
-    },
-    'exp.intern.company': {
-      en: 'Enterprise Tech Solutions • Morocco',
-      fr: 'Solutions Informatiques & Digitales • Maroc'
-    },
-    'exp.intern.period': { en: 'Jul 2025 – Aug 2025', fr: 'Juil 2025 – Août 2025' },
-    'exp.intern.desc': {
-      en: 'Designed and implemented full-stack modules for a commercial monitoring web application. Integrated REST APIs, implemented secure JWT authentication, and developed responsive Angular dashboard components.',
-      fr: 'Conception et développement de modules full-stack pour une application de monitoring commercial. Intégration d’API REST sécurisées avec JWT, et développement de dashboards réactifs avec Angular.'
+
+    // Education 3: Baccalaureate STE
+    'edu.bac.degree': { en: 'Baccalaureate in Electrical Sciences & Technologies', fr: 'Baccalauréat en Sciences et Technologies Électriques (STE)' },
+    'edu.bac.school': { en: 'Lycée Tassaout', fr: 'Lycée Tassaout' },
+    'edu.bac.location': { en: 'El Kelaâ des Sraghna, Morocco', fr: 'El Kelaâ des Sraghna, Maroc' },
+    'edu.bac.period': { en: '2023 – 2024', fr: '2023 – 2024' },
+    'edu.bac.desc': {
+      en: 'Technical scientific secondary education covering electronics, electrical engineering, industrial systems, and algorithmic problem-solving.',
+      fr: 'Formation scientifique technique couvrant l’électronique, l’électrotechnique, les systèmes industriels et la résolution méthodique de problèmes algorithmiques.'
     },
 
     // Contact Section
@@ -175,8 +235,8 @@ export class TranslationService {
       fr: '✓ Merci ! Votre message a bien été envoyé.'
     },
     'contact.error': {
-      en: 'Could not send directly. Please email me at zakriaoukhamou11@gmail.com.',
-      fr: 'Impossible d\'envoyer directement. Veuillez m\'écrire à zakriaoukhamou11@gmail.com.'
+      en: 'Could not send directly. Please email me at zakariaoukhamou11@gmail.com.',
+      fr: 'Impossible d\'envoyer directement. Veuillez m\'écrire à zakariaoukhamou11@gmail.com.'
     }
   };
 
